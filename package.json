@@ -17,6 +17,9 @@
     "standard-version": "^9.5.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
+    "husky": "^8.0.3",
     "nodemon": "^3.0.1"
   },
   "description": ""
