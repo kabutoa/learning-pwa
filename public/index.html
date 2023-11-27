@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pwa-demo</title>
+    <link rel="stylesheet" href="./index.css">
+  </head>
+  <body>
+    <div id="app">
+      <div class="app-search">
+        <input type="text" v-model="keywords" class="search-input" />
+        <button @click="onSearch" class="search-button">
+          <img src="./search.png" alt="search icon">
+        </button>
+      </div>
+      <template v-if="!loading">
+        <ul v-if="newsList?.length" class="app-news">
+          <li v-for="(news, index) in newsList" :key="index" class="news-item">
+            <div class="news-item-title">{{ news.title }}</div>
+            <div class="news-item-digest">{{ news.digest }}</div>
+            <div class="news-item-mtime">{{ news.mtime }}</div>
+          </li>
+        </ul>
+        <div v-else>暂无数据</div>
+      </template>
+      <div v-else>加载中...</div>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.7.9/vue.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.5.0/axios.min.js"></script>
+    <script>
+      const vm = new Vue({
+        el: "#app", // 可以通过$mount手动挂载
+        data() {
+          return {
+            newsList: [],
+            loading: false,
+            keywords: "",
+          };
+        },
+        methods: {
+          async onSearch() {
+            if (this.loading) {
+              return;
+            }
+            this.loading = true;
+            const keywords = this.keywords;
+            const { data } = await axios(`/api/news?keywords=${keywords}`);
+            this.newsList = data;
+            this.loading = false;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

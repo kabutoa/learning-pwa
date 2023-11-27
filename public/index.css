@@ -1,0 +1,70 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  border: none;
+  outline: none;
+  background: none;
+}
+
+input {
+  border: none;
+  outline: none;
+}
+
+ul, li {
+  list-style: none;
+}
+
+html,body {
+  width: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+#app {
+  width: 80%;
+  margin: 100px auto;
+}
+
+.app-search {
+  display: flex;
+  align-items: center;
+  height: 32px;
+}
+
+.search-input {
+  width: 160px;
+  height: 28px;
+  padding: 2px;
+  border: 1px solid #ccc;
+}
+
+.search-button {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.search-button > img {
+  width: 100%;
+  height: 100%;
+}
+
+.news-item {
+  padding: 8px 0;
+}
+
+.news-item-title {
+  color: #333;
+}
+
+.news-item-mtime {
+  color: #ccc;
+}
