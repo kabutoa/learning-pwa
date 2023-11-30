@@ -4,39 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>learning pwa</title>
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="./index.css">
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
     <div id="app">
       <div class="app-search">
-        <input type="text" v-model="keywords" class="search-input" />
+        <span>获取随机文章:</span>
         <button @click="onSearch" class="search-button">
-          <img src="./images/search.png" alt="search icon">
+          <img src="./images/search.png" alt="search icon" />
         </button>
       </div>
       <template v-if="!loading">
-        <ul v-if="newsList?.length" class="app-news">
-          <li v-for="(news, index) in newsList" :key="index" class="news-item">
-            <div class="news-item-title">{{ news.title }}</div>
-            <div class="news-item-digest">{{ news.digest }}</div>
-            <div class="news-item-mtime">{{ news.mtime }}</div>
+        <ul v-if="articleList?.length" class="app-articles">
+          <li
+            v-for="(article, index) in articleList"
+            :key="index"
+            class="articles-item"
+          >
+            <div class="articles-item-title">
+              {{ article.item_info.article_info.title }}
+            </div>
+            <div class="articles-item-digest">
+              {{ article.item_info.article_info.brief_content }}
+            </div>
+            <div class="articles-item-mtime">
+              {{ article.item_info.article_info.mtime }}
+            </div>
           </li>
         </ul>
         <div v-else>暂无数据</div>
       </template>
       <div v-else>加载中...</div>
     </div>
-    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.7.9/vue.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.5.0/axios.min.js"></script>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.7.9/vue.min.js"></script> -->
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.5.0/axios.min.js"></script> -->
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/axios.js"></script>
     <script>
       const vm = new Vue({
         el: "#app", // 可以通过$mount手动挂载
         data() {
           return {
-            newsList: [],
+            articleList: [],
             loading: false,
-            keywords: "",
           };
         },
         methods: {
@@ -45,12 +56,20 @@
               return;
             }
             this.loading = true;
-            const keywords = this.keywords;
-            const { data } = await axios(`/api/news?keywords=${keywords}`);
-            this.newsList = data;
+            const { data } = await axios(`/api/articles`);
+            this.articleList = data;
             this.loading = false;
           },
         },
+      });
+      // 注册service worker
+      window.addEventListener("load", async () => {
+        try {
+          const res = await navigator.serviceWorker?.register("sw.js");
+          console.log(res, "Service worker registered successfully!");
+        } catch {
+          console.log("Your browser does not support service worker!");
+        }
       });
     </script>
   </body>

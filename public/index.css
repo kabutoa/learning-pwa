@@ -10,11 +10,6 @@ button {
   background: none;
 }
 
-input {
-  border: none;
-  outline: none;
-}
-
 ul, li {
   list-style: none;
 }
@@ -57,14 +52,14 @@ body {
   height: 100%;
 }
 
-.news-item {
+.articles-item {
   padding: 8px 0;
 }
 
-.news-item-title {
+.articles-item-title {
   color: #333;
 }
 
-.news-item-mtime {
+.articles-item-mtime {
   color: #ccc;
 }

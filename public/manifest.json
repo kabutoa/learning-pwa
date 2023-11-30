@@ -1,10 +1,10 @@
 {
-  "name": "每日新闻-news",
-  "short_name": "每日新闻",
+  "name": "每日热榜文章-articles",
+  "short_name": "每日热榜文章",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#333",
-  "description": "一个呈现每日新闻的web app",
+  "description": "一个呈现每日热榜文章的web app",
   "orientation": "portrait-primary",
   "theme_color": "#5eace0",
   "icons": [
