@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pwa-demo</title>
+    <title>learning pwa</title>
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="./index.css">
   </head>
   <body>
@@ -11,7 +12,7 @@
       <div class="app-search">
         <input type="text" v-model="keywords" class="search-input" />
         <button @click="onSearch" class="search-button">
-          <img src="./search.png" alt="search icon">
+          <img src="./images/search.png" alt="search icon">
         </button>
       </div>
       <template v-if="!loading">
