@@ -71,6 +71,24 @@
           console.log("Your browser does not support service worker!");
         }
       });
+      // 通知
+      if (Notification.permission === "default") {
+        Notification.requestPermission();
+      }
+      window.addEventListener("online", () => {
+        if (Notification.permission === "granted") {
+          new Notification("提示", {
+            body: "您处于连网状态，刷新获取最新数据",
+          });
+        }
+      });
+      window.addEventListener("offline", () => {
+        if (Notification.permission === "granted") {
+          new Notification("提示", {
+            body: "您处于离线状态，当前访问缓存数据",
+          });
+        }
+      });
     </script>
   </body>
 </html>
